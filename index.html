@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSoC'24 Journey: singul4ri7y</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <content>
+        <header class="header">
+            <h1>My GSoC'24 Journey</h1>
+            <div class="misc">
+                <div class="links">
+                    <a href="https://linkedin.com/in/singul4ri7y" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/singul4ri7y" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="date">24th August, 2024</div>
+                <div class="switch">
+                    <input id="switch" class="switch__input" name="switch" type="checkbox">
+                    <label class="switch__label" for="switch"></label>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="main-content">
+                <p>Ahh, who could&#39;ve thought? I spent my entire summer coding away as part of <a href="summerofcode.withgoogle.com" class="effect">Google Summer of Code</a>! Feels like the summer just began yesterday.</p>
+
+                <h2 id="prologue">Prologue</h2>
+                <p>Konnichiwa, I&#39;m Syed Naimul Hasan Asif (alias SD Asif Hossein), an Electrical Engineering undergrade student from Bangladesh who is passionate about low-level programming, programming language research, operating systems development, deep learning and high-performance computing. This short blog post covers <a href="http://www.lua.inf.puc-rio.br/gsoc/blog2024.html#pallene" id="effect">my work</a> at Google Summer of Code 2024.</p>
+                <p>Over the time period, I have contributed to <a href="https://github.com/pallene-lang/pallene"id="effect" >Pallene</a> , an ahead-of-time compiled companion language to Lua used to write Lua&#39;s most performance critical code. Pallene is arguably more predictable and efficient than LuaJIT and Lua C API (benchmarks in the paper attached below). Pallene shares identical syntax as Lua enabling users to write high-performance code swiftly without worrying about API. Although, Pallene and Lua have a lot in common including runtime, Pallene lacks significantly in case of user debugging experience.</p>
+                <p>As first line of work to tackle this challenge, our goal in <a href="https://summerofcode.withgoogle.com/programs/2024/projects/L0tirNFw" class="effect">this project</a> was to introduce proper stack-trace support upon error by tracking function calls during runtime enhancing overall debugging experience in Pallene. But the Lua call-stack lacks the feature of storing line number information for Lua-to-C calls and is completely agnostic to both inter- and intra-module C-to-C calls. It also affects Pallene which eventually transpiles to C.</p>
+                <p>To address the problem not only for Pallene but also for broader Lua C modules, a separate project was introduced, <a href="https://github.com/pallene-lang/pallene-tracer" class="effect">Pallene Tracer</a>. Pallene Tracer provides tools, protocols and mechanisms to enable function tracebacks, generating a proper stack-trace with all the C-to-C call-frames and respective line numbers, without touching the Lua source code. Hence, over the course of summer we worked on Pallene Tracer, adoption of Pallene Tracer in Pallene and other Lua C libraries.</p>
+                <p>You can learn more about Pallene in <a href="https://www.inf.puc-rio.br/~hgualandi/papers/Gualandi-2020-SCP.pdf" class="effect">this paper</a>, written by my Mentor <a href="https://www.inf.puc-rio.br/~hgualandi/" class="effect">Hugo Musso Gualandi</a>.</p>
+
+                <h2 id="get-the-code">Get the Code</h2>
+                <p>A good amount of code was written as part of this project for both Pallene and Pallene Tracer regarding function traceback and generating nice stack-trace during summer period.</p>
+                <p>My,<br>
+                Merged PRs in Pallene can be found <a href="https://github.com/pallene-lang/pallene/pulls?q=is%3Apr+is%3Aclosed+author%3Asingul4ri7y+created%3A%3E2024-05-27+merged%3A%3C2024-08-20" class="effect">here</a>.<br>
+                Merged PRs in Pallene Tracer can be found <a href="https://github.com/pallene-lang/pallene-tracer/pulls?q=is%3Apr+is%3Aclosed+author%3Asingul4ri7y+created%3A%3E2024-05-27+merged%3A%3C2024-08-20" class="effect">here</a>.</p>
+                <p>An amazing fact I enjoyed about working in this project is the collaboration between student and mentors. Coming up with a separate project like Pallene Tracer to deliver the tools, mechanisms and protocols used in Pallene to other Lua C modules was out of our idea list. But we did it regardless, just thinking about thousands of Lua C modules getting benefited from it!</p>
+                <p>Hence, my mentor Hugo and I both worked in Pallene Tracer together 🔥! You can find Hugo&#39;s merged PRs <a href="https://github.com/pallene-lang/pallene-tracer/pulls?q=is%3Apr+is%3Aclosed+author%3Ahugomg+created%3A%3E2024-05-27+merged%3A%3C2024-08-20" class="effect">here</a>.</p>
+
+                <h2 id="my-mentors">My Mentors</h2>
+                <p>In this project, I was lucky enough to have <a href="https://www.inf.puc-rio.br/~hgualandi/" class="effect">Hugo Musso Gualandi</a> as my mentor, <a href="https://injuly.in/" class="effect">Srijan Paul</a> and <a href="https://www.linkedin.com/in/gabriel-ligneul" class="effect">Gabriel de Quadros Ligneul</a> as co-mentors. They are amazing, period.</p>
+
+                <h2 id="the-pallene-tracer">The Pallene Tracer</h2>
+                <p>For comprehensive technical overview and learn how Pallene Tracer works, please refer to the <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/docs/MANUAL.md" class="effect">documentation</a>.</p>
+                <p>As aforementioned, Lua call-stack does not store line number information for Lua-to-C calls and is completely oblivious to C-to-C calls. Changing Lua source code to implement those features was not an option, so we decided to create a call-stack ourselves storing the relevant information. We call it the Pallene Tracer call-stack.</p>
+                <p>At start, we decided to take the Linked List stack implementation route for Pallene Tracer call-stack, where we stored each frame structure in C stack memory and link between the call-frames. This approach was neat and didn&#39;t require any separate buffer allocation. <b>But</b>, there was a fundamental flaw in our idea.</p>
+                <p>While using Pallene Tracer you are expected to utilize macros. A macro to push a call-frame into Pallene Tracer call-stack used at the beginning of the function, a macro to set line number information to the topmost call-frame and finally another macro to pop frame out of the call-stack when we exit the function execution. we call it <code>FRAMEENTER</code>, <code>SETLINE</code> and <code>FRAMEEXIT</code> macros respectively. In order for a function to be traced, it must create a frame in call-stack by calling FRAMEENTER macro and should remove the frame by calling FRAMEEXIT whenever function is done executing. A function will only appear in stack-trace when respective call-frame is in the call-stack. In most cases, calling FRAMEENTER is generally safe because no runtime error is invoked as it&#39;s called at the very beginning of the function. But same cannot be said for respective FRAMEEXIT because when runtime error occurs, function execution terminates prior reaching FRAMEEXIT. This causes stack corruption and memory bugs specifically for the Linked List stack approach. This is generally not a problem since Lua interpreter exits right after the error. But it is a problem, when the error is caught by <code>pcall()</code> and its variants and interpreter continues. This bug has been mentioned in this <a href="https://github.com/pallene-lang/pallene/issues/604" class="effect">issue</a>.</p>
+                <p>To solve the problem, the first approach was to switch to more buffer-like stack, e.g. heap allocated stack. That did fix the memory errors but the stack corruption remained because of insufficient FRAMEEXITs. To fix that problem we exploited the property of To-be-Closed Objects with <code>__close</code> metamethod. To learn more about how it is implemented, please refer to <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/docs/MANUAL.md#24-significance-of-to-be-closed-finalizer-object" class="effect">the finalizer object</a> section of documentation.</p>
+                <p>Accumulating frames into a separate stack is useless if not printed. The builtin Lua traceback function is incapable of taking advantage of the separate call-stack we have. That&#39;s why we had to come up with our separate debug traceback function which use both of the call-stacks (our call-stack and Lua call-stack), generating a reasonable stack-trace. Our debug traceback function is the default traceback for custom Pallene Tracer Lua frontend, <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/docs/MANUAL.md#26-the-pallene-tracer-lua-frontend"><code>pt-lua</code></a>. An error handler function is also provided as a Lua global, <code>pallene_tracer_errhandler</code> to use the custom traceback function against <code>xpcall()</code> and its variants.</p>
+                <p>To know more about how Pallene Tracer is implemented, please refer to <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/docs/MANUAL.md#2-implementation" class="effect">implementation</a> section of the documentation.</p>
+
+                <h2 id="enabling-tracebacks-in-pallene">Enabling Tracebacks in Pallene</h2>
+                <p>To enable tracebacks in Pallene, simply pass the <code>--use-traceback</code> flag while compiling a Pallene translation.</p>
+                <pre><code class="code-block">pallenec some.pln --use-traceback</code></pre>
+                <p>This will enable tracing across all the Pallene functions. To generate stack-trace in case of runtime errors, run the Lua script using Pallene module with our custom Lua frontend:</p>
+                <pre><code class="code-block">pt-lua main.lua args ...</code></pre>
+                <p>To learn more about how Pallene Tracer was adopted into Pallene, please refer to the <a href="https://github.com/pallene-lang/pallene/blob/master/doc/traceback.md" class="effect">traceback documentation</a> of Pallene.</p>
+
+                <h2 id="using-pt">Using Pallene Tracer in Lua C Libraries</h2>
+                <p>As I have mentioned earlier, we have to utilize macros in functions to enable tracebacks. First, install Pallene Tracer in your machine. First clone the repository and then follow the instructions mentioned in the <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/README.md" class="effect">landing page</a> to install it.</p>
+                <p>Suppose, we have a module named <code>depth-recursion</code> and a Lua script <code>main.lua</code> using that module. The module consists of a single C source named <code>recursion.c</code>. The idea here is C and Lua function calling each other until a specific depth has been reached. We are deliberately invoking a runtime error for demonstration.</p>
+                <p align="right"><small><i>recursion.c</i></small></p>
+                <pre><code class="code-block"><span class="c-directive">#include</span> <span class="c-header">&lt;lua.h&gt;</span>
+<span class="c-directive">#include</span> <span class="c-header">&lt;lauxlib.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-function">depth_fn</span>(<span class="c-type">lua_State</span> *L, <span class="c-type">int</span> depth) {
+    <span class="c-function">lua_pushvalue</span>(L, <span class="c-constant">1</span>);
+
+    <span class="c-keyword">if</span>(depth == <span class="c-constant">0</span>)
+        <span class="c-function">lua_pushinteger</span>(L, depth);
+    <span class="c-keyword">else</span> <span class="c-function">lua_pushinteger</span>(L, depth - <span class="c-constant">1</span>);
+
+    <span class="c-function">lua_call</span>(L, <span class="c-constant">1</span>, <span class="c-constant">0</span>);
+}
+
+<span class="c-type">int</span> <span class="c-function">depth_fn_lua</span>(<span class="c-type">lua_State</span> *L) {
+    <span class="c-comment">/* Look at the macro definitions. */</span>
+    <span class="c-keyword">if</span>(<span class="c-function">luai_unlikely</span>(<span class="c-function">lua_gettop</span>(L) &lt; <span class="c-constant">2</span>))
+        <span class="c-function">luaL_error</span>(L, <span class="c-string">"Expected atleast 2 parameters"</span>);
+
+    <span class="c-comment">/* ---- `lua_fn` ---- */</span>
+    <span class="c-keyword">if</span>(<span class="c-function">luai_unlikely</span>(<span class="c-function">lua_isfunction</span>(L, <span class="c-constant">1</span>) == <span class="c-constant">0</span>))
+        <span class="c-function">luaL_error</span>(L, <span class="c-string">"Expected the first parameter to be a function"</span>);
+
+    <span class="c-keyword">if</span>(<span class="c-function">luai_unlikely</span>(<span class="c-function">lua_isinteger</span>(L, <span class="c-constant">2</span>) == <span class="c-constant">0</span>))
+        <span class="c-function">luaL_error</span>(L, <span class="c-string">"Expected the second parameter to be an integer"</span>);
+
+    <span class="c-type">int</span> depth = <span class="c-function">lua_tointeger</span>(L, <span class="c-constant">2</span>);
+
+    <span class="c-comment">/* Dispatch. */</span>
+    <span class="c-function">depth_fn</span>(L, depth);
+
+    <span class="c-keyword">return</span> <span class="c-constant">0</span>;
+}
+
+<span class="c-type">int</span> <span class="c-function">luaopen_recursion</span>(<span class="c-type">lua_State</span> *L) {
+    <span class="c-function">lua_newtable</span>(L);
+
+    <span class="c-comment">/* ---- depth_fn ---- */</span>
+    <span class="c-function">lua_pushcfunction</span>(L, <span class="c-function">depth_fn_lua</span>);
+    <span class="c-function">lua_setfield</span>(L, <span class="c-constant">-2</span>, <span class="c-string">"depth_fn"</span>);
+
+    <span class="c-keyword">return</span> <span class="c-constant">1</span>;
+}</code></pre>
+
+                <p align="right"><small><i>main.lua</i></small></p>
+                <pre><code class="code-block"><span class="lua-keyword">local</span> recursion = <span class="lua-keyword">require</span> <span class="lua-string">"recursion"</span>
+
+<span class="lua-keyword">function</span> <span class="lua-function">lua_fn</span>(depth)
+    <span class="lua-keyword">if</span> depth == <span class="lua-number">0</span> <span class="lua-keyword">then</span>
+        <span class="lua-function">error</span> <span class="lua-string">"Depth reached 0!"</span>
+    <span class="lua-keyword">end</span>
+
+    <span class="lua-table">recursion</span>.<span class="lua-function">depth_fn</span>(<span class="lua-function">lua_fn</span>, depth - <span class="lua-number">1</span>)
+<span class="lua-keyword">end</span>
+
+<span class="lua-function">lua_fn</span>(<span class="lua-number">10</span>)</code></pre>
+
+                <p>Here, we have a C function <code>depth_fn</code> and a Lua function <code>lua_fn</code>, both calling each other until the provided depth number reaches 0. Here in <code>recursion.c</code>, I have used the <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/docs/MANUAL.md#32-the-dispatch-mechanism" class="effect">dispatch mechanism</a> to dispatch from Lua C function to a normal C function, doing parameter check beforehand. Following this type of mechanism is oftentimes performant while writing modules with large function call depths. Now, after compiling the module with</p>
+                <pre><code class="code-block">gcc -std=c99 -pedantic -Wall -Wextra -fPIC -shared recursion.c -o recursion.so</code></pre>
+                <p>if we run the <code>main.lua</code> script with traditional Lua interpreter, we get the following error: </p>
+                <pre><code class="code-block">lua: main.lua:5: Depth reached 0!
+stack traceback:
+	[C]: in function 'error'
+	main.lua:5: in function 'lua_fn'
+	[C]: in function 'recursion.depth_fn'
+	main.lua:8: in function 'lua_fn'
+	[C]: in function 'recursion.depth_fn'
+	main.lua:8: in function 'lua_fn'
+	[C]: in function 'recursion.depth_fn'
+	main.lua:8: in function 'lua_fn'
+	[C]: in function 'recursion.depth_fn'
+	main.lua:8: in function 'lua_fn'
+	[C]: in function 'recursion.depth_fn'
+	main.lua:8: in function 'lua_fn'
+	main.lua:11: in main chunk
+	[C]: in ?</code></pre>
+                <p>Which is not super useful, because we don&#39;t have line numbers in C call-frame. To improve the traceback, we can integrate Pallene Tracer into the module. It would take to use copy-pasting some boilerplate macros, using the macros in the functions and finally binding the functions with Pallene Tracer call-stack Upvalues.</p>
+                <p align="right"><small><i>recursion.c</i></small></p>
+                <pre><code class="code-block"><span class="c-directive">#include</span> <span class="c-header">&lt;lua.h&gt;</span>
+<span class="c-directive">#include</span> <span class="c-header">&lt;lauxlib.h&gt;</span>
+
+<span class="c-directive">#define</span> PT_IMPLEMENTATION
+<span class="c-directive">#include</span> <span class="c-header">&lt;ptracer.h&gt;</span>
+
+<span class="c-comment">/** =============== BOILERPLATES ================ **/</span>
+
+<span class="c-comment">/* Here goes user specific macros when Pallene Tracer debug mode is active. */</span>
+<span class="c-directive">#ifdef</span> PT_DEBUG
+<span class="c-directive">#define</span> MODULE_GET_FNSTACK                                       \
+    <span class="c-type">pt_fnstack_t</span> *fnstack = <span class="c-function">lua_touserdata</span>(L,                    \
+        <span class="c-function">lua_upvalueindex</span>(<span class="c-constant">1</span>))
+<span class="c-directive">#else</span>
+<span class="c-directive">#define</span> MODULE_GET_FNSTACK
+<span class="c-directive">#endif</span> <span class="c-comment">// PT_DEBUG</span>
+
+<span class="c-comment">/* ---------------- LUA INTERFACE FUNCTIONS ---------------- */</span>
+
+<span class="c-directive">#define</span> MODULE_LUA_FRAMEENTER(fnptr)                             \
+    MODULE_GET_FNSTACK;                                          \
+    PALLENE_TRACER_LUA_FRAMEENTER(L, fnstack, fnptr,             \
+        <span class="c-function">lua_upvalueindex</span>(<span class="c-constant">2</span>), _frame)
+
+<span class="c-comment">/* ---------------- LUA INTERFACE FUNCTIONS END ---------------- */</span>
+
+<span class="c-comment">/* ---------------- FOR C INTERFACE FUNCTIONS ---------------- */</span>
+
+<span class="c-directive">#define</span> MODULE_C_FRAMEENTER()                                    \
+    MODULE_GET_FNSTACK;                                          \
+    PALLENE_TRACER_GENERIC_C_FRAMEENTER(fnstack, _frame)
+
+<span class="c-directive">#define</span> MODULE_C_SETLINE()                                       \
+    PALLENE_TRACER_GENERIC_C_SETLINE(fnstack)
+
+<span class="c-directive">#define</span> MODULE_C_FRAMEEXIT()                                     \
+    PALLENE_TRACER_FRAMEEXIT(fnstack)
+
+<span class="c-comment">/* ---------------- FOR C INTERFACE FUNCTIONS END ---------------- */</span>
+
+<span class="c-comment">/** =============== BOILERPLATES END ================ **/</span>
+
+<span class="c-type">void</span> <span class="c-function">depth_fn</span>(<span class="c-type">lua_State</span> *L, <span class="c-type">int</span> depth) {
+    MODULE_C_FRAMEENTER();
+
+    <span class="c-function">lua_pushvalue</span>(L, <span class="c-constant">1</span>);
+
+    <span class="c-keyword">if</span>(depth == <span class="c-constant">0</span>)
+        <span class="c-function">lua_pushinteger</span>(L, depth);
+    <span class="c-keyword">else</span> <span class="c-function">lua_pushinteger</span>(L, depth - <span class="c-constant">1</span>);
+
+    <span class="c-comment">/* Set line number to current active frame in the Pallene callstack and</span>
+       <span class="c-comment">call the function which is already in the Lua stack. */</span>
+    MODULE_C_SETLINE();
+    <span class="c-function">lua_call</span>(L, <span class="c-constant">1</span>, <span class="c-constant">0</span>);
+
+    MODULE_C_FRAMEEXIT();
+}
+
+<span class="c-type">int</span> <span class="c-function">depth_fn_lua</span>(<span class="c-type">lua_State</span> *L) {
+    <span class="c-type">int</span> top = <span class="c-function">lua_gettop</span>(L);
+    MODULE_LUA_FRAMEENTER(<span class="c-function">depth_fn_lua</span>);
+
+    <span class="c-comment">/* Look at the macro definitions. */</span>
+    <span class="c-keyword">if</span>(<span class="c-function">luai_unlikely</span>(top &lt; <span class="c-constant">2</span>))
+        <span class="c-function">luaL_error</span>(L, <span class="c-string">"Expected atleast 2 parameters"</span>);
+
+    <span class="c-comment">/* ---- `lua_fn` ---- */</span>
+    <span class="c-keyword">if</span>(<span class="c-function">luai_unlikely</span>(<span class="c-function">lua_isfunction</span>(L, <span class="c-constant">1</span>) == <span class="c-constant">0</span>))
+        <span class="c-function">luaL_error</span>(L, <span class="c-string">"Expected the first parameter to be a function"</span>);
+
+    <span class="c-keyword">if</span>(<span class="c-function">luai_unlikely</span>(<span class="c-function">lua_isinteger</span>(L, <span class="c-constant">2</span>) == <span class="c-constant">0</span>))
+        <span class="c-function">luaL_error</span>(L, <span class="c-string">"Expected the second parameter to be an integer"</span>);
+
+    <span class="c-type">int</span> depth = <span class="c-function">lua_tointeger</span>(L, <span class="c-constant">2</span>);
+
+    <span class="c-comment">/* Dispatch. */</span>
+    <span class="c-function">depth_fn</span>(L, depth);
+
+    <span class="c-keyword">return</span> <span class="c-constant">0</span>;
+}
+
+<span class="c-type">int</span> <span class="c-function">luaopen_recursion</span>(<span class="c-type">lua_State</span> *L) {
+    <span class="c-comment">/* Our stack. */</span>
+    <span class="c-type">pt_fnstack_t</span> *fnstack = <span class="c-function">pallene_tracer_init</span>(L);
+
+    <span class="c-function">lua_newtable</span>(L);
+
+    <span class="c-comment">/* One very good way to integrate our stack userdatum and finalizer</span>
+      <span class="c-comment">object is by using Lua upvalues. */</span>
+    <span class="c-comment">/* ---- depth_fn ---- */</span>
+    <span class="c-function">lua_pushlightuserdata</span>(L, fnstack);
+    <span class="c-comment">/* `pallene_tracer_init` function pushes the frameexit finalizer to the stack. */</span>
+    <span class="c-function">lua_pushvalue</span>(L, -<span class="c-constant">3</span>);
+    <span class="c-function">lua_pushcclosure</span>(L, <span class="c-function">depth_fn_lua</span>, <span class="c-constant">2</span>);
+    <span class="c-function">lua_setfield</span>(L, -<span class="c-constant">2</span>, <span class="c-string">"depth_fn"</span>);
+
+    <span class="c-keyword">return</span> <span class="c-constant">1</span>;
+}</code></pre>
+                <p>After compiling with,</p>
+                <pre><code class="code-block">gcc -DPT_DEBUG -std=c99 -pedantic -Wall -Wextra -fPIC -shared recursion.c -o recursion.so</code></pre>
+                <p>if we run <code>main.lua</code> against <code>pt-lua</code>, our Lua frontend, we get:</p>
+                <pre><code class="code-block">pt-lua: main.lua:5: Depth reached 0!
+stack traceback:
+    C: in function 'error'
+    main.lua:5: in function 'lua_fn'
+    recursion.c:55: in function 'depth_fn'
+    main.lua:8: in function 'lua_fn'
+    recursion.c:55: in function 'depth_fn'
+    main.lua:8: in function 'lua_fn'
+    recursion.c:55: in function 'depth_fn'
+    main.lua:8: in function 'lua_fn'
+    recursion.c:55: in function 'depth_fn'
+    main.lua:8: in function 'lua_fn'
+    recursion.c:55: in function 'depth_fn'
+    main.lua:8: in function 'lua_fn'
+    main.lua:11: in &lt;main&gt;
+    C: in function '&lt;?&gt;'</code></pre>
+                <p>which includes line number information. It would also include all the missing traces if there is any.</p>
+                <p>It is highly encouraged to read through the <a href="https://github.com/pallene-lang/pallene-tracer/blob/main/docs/MANUAL.md#3-mechanism"class="effect">mechanism</a> section of the documentation.</p>
+
+                <h2 id="future-expectations">Future Expectations</h2>
+                <p>Even though we have put a lot of work in Pallene Tracer and it&#39;s adoption to Pallene, there are still a lot of work to be done here. As we aim to make Pallene Tracer reachable to broad Lua C library hackers, we have to come up with more generalized macros, making it more developer friendly.</p>
+                <p>Pallene Tracer is in very early stage of development, a lot of bugs may still be lingering around that we are unaware of. We aim to fix these bugs if appears and improve Pallene Tracer as time goes by.</p>
+
+                <h2 id="epilogue">Epilogue</h2>
+                <p>I am really glad and proud that I got to work with a real-world open-source project learning a ton of things from my mentor. I also got the chance to collaborate with my mentors, continuously discussing and implementing code and working side-by-side to make a difference in the community.</p>
+                <p><a href="http://www.lua.inf.puc-rio.br/" class="effect">LabLua</a> is an amazing organization. I would recommend my organization to anyone who is starting out GSoC. I would also like to do mentorship from behalf of LabLua someday.</p>
+                <p>Finally, at the end of the day, I absolutely adored my GSoC journey ❤️. Peace 😇.</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Made with ❤️  by @singul4ri7y</p>
+        </footer>
+    </content>
+
+    <script>
+        const body = document.querySelector("body");
+        const theme_switcher = document.querySelector("#switch");
+
+        // Check preffered theme
+        const preferred_dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        theme_switcher.checked = preferred_dark;
+        body.className = preferred_dark ? "dark" : "light";
+
+        theme_switcher.oninput = () => {
+            body.className = theme_switcher.checked ? "dark" : "light";
+        };
+    </script>
+</body>
+</html>
+

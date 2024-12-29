@@ -1,0 +1,459 @@
+body {
+    font-family: Rubik, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+h1 {
+    font-weight: 500;
+}
+
+h2 {
+    font-weight: 500;
+}
+
+p { line-height: 2.75vh; }
+b { font-weight: 500; }
+
+code {
+    padding: 3px;
+    border-radius: 6px;
+}
+
+code.code-block {
+    display: block;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 11pt;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+body.light {
+    background-color: #E6F0FF;
+    color: #36454F;
+}
+
+body.dark {
+    background-color: #1e1e1e;
+    color: #ddd;
+}
+
+body.light code {
+    background-color: #d0e6ff;
+    color: #2b3a42;
+}
+
+body.dark code {
+    background-color: #2d2d2d;
+    color: #bd93f9;
+}
+
+body.light code.code-block {
+    color: #36454F;
+}
+
+body.dark code.code-block {
+    color: #ddd;
+}
+
+body.light code.code-block {
+    background-color: #d0e6ff;
+    color: #2b3a42;
+}
+
+/* Directives like #include */
+body.light code.code-block span.c-directive {
+    color: #005cc5;
+}
+
+/* Header files inside #include */
+body.light code.code-block span.c-header {
+    color: #24292e;
+}
+
+/* Data types like int, void */
+body.light code.code-block span.c-type {
+    color: #d73a49;
+}
+
+/* Function names */
+body.light code.code-block span.c-function {
+    color: #6f42c1;
+}
+
+/* Keywords like if, else, return */
+body.light code.code-block span.c-keyword {
+    color: #d73a49;
+}
+
+/* Constants like numbers */
+body.light code.code-block span.c-constant {
+    color: #005cc5;
+}
+
+/* Strings inside quotes */
+body.light code.code-block span.c-string {
+    color: #032f62;
+}
+
+/* Comments */
+body.light code.code-block span.c-comment {
+    color: #6a737d;
+}
+
+/* Keywords like local, function, if, then, end, require */
+body.light code.code-block span.lua-keyword {
+    color: #d73a49;
+}
+
+/* Strings inside quotes */
+body.light code.code-block span.lua-string {
+    color: #032f62;
+}
+
+/* Numbers like 0, 10 */
+body.light code.code-block span.lua-number {
+    color: #005cc5;
+}
+
+/* Function names */
+body.light code.code-block span.lua-function {
+    color: #6f42c1;
+}
+
+/* Tables (e.g., variable names referencing tables) */
+body.light code.code-block span.lua-table {
+    color: #22863a;
+}
+
+/* Directives like #include */
+body.dark code.code-block span.c-directive {
+    color: #569cd6;
+}
+
+/* Header files inside #include */
+body.dark code.code-block span.c-header {
+    color: #9cdcfe;
+}
+
+/* Data types like int, void */
+body.dark code.code-block span.c-type {
+    color: #4ec9b0;
+}
+
+/* Function names */
+body.dark code.code-block span.c-function {
+    color: #dcdcaa;
+}
+
+/* Keywords like if, else, return */
+body.dark code.code-block span.c-keyword {
+    color: #c586c0;
+}
+
+/* Constants like numbers */
+body.dark code.code-block span.c-constant {
+    color: #b5cea8;
+}
+
+/* Strings inside quotes */
+body.dark code.code-block span.c-string {
+    color: #ce9178;
+}
+
+/* Comments */
+body.dark code.code-block span.c-comment {
+    color: #6a9955;
+}
+
+/* Keywords like local, function, if, then, end, require */
+body.dark code.code-block span.lua-keyword {
+    color: #569cd6;
+}
+
+/* Strings inside quotes */
+body.dark code.code-block span.lua-string {
+    color: #ce9178;
+}
+
+/* Numbers like 0, 10 */
+body.dark code.code-block span.lua-number {
+    color: #b5cea8;
+}
+
+/* Function names */
+body.dark code.code-block span.lua-function {
+    color: #dcdcaa;
+}
+
+/* Tables (e.g., variable names referencing tables) */
+body.dark code.code-block span.lua-table {
+    color: #4ec9b0;
+}
+
+
+header.header {
+    padding: 30px 30px 40px;
+    text-align: center;
+    position: relative;
+    border-top-left-radius: 15px 15px;
+    border-top-right-radius: 15px 15px;
+}
+
+body.light header.header {
+    background-color: #fff;
+}
+
+body.dark header.header {
+    background-color: #333;
+}
+
+.header h1 {
+    margin: 0 0 25px;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 97%;
+    margin: auto;
+    height: 20px;
+    border-top-left-radius: 100px 100px;
+    border-top-right-radius: 100px 100px;
+}
+
+body.light .header::after {
+    background-color: #E6F0FF;
+}
+
+body.dark .header::after {
+    background-color: #1e1e1e;
+}
+
+content {
+    display: block;
+    margin: 5% auto;
+}
+
+.misc {
+    display: flex;
+}
+
+.links {
+    flex: initial;
+}
+
+.links a {
+    text-decoration: none;
+    margin: 0 3px;
+    font-size: 18px;
+}
+
+body.light .links a {
+    color: #36454F;
+}
+
+body.light .links a:hover {
+    color: #535353;
+}
+
+body.dark .links a {
+    color: #fcfcfc;
+}
+
+body.dark .links a:hover {
+    color: #ddd;
+}
+
+.date {
+    flex: auto;
+}
+
+body .switch {
+    position: relative;
+    flex: none;
+}
+
+body .switch__input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+body .switch__label {
+  display: block;
+  position: relative;
+  width: 25pt;
+  height: 15pt;
+  background-color: #333;
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
+}
+
+body .switch__label::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: auto;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 2px #333 solid;
+  background-color: #fff;
+  color: #333;
+  transition: 0.3s ease-in-out;
+  content: "\f185";
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  font-weight: 900;
+  box-sizing: border-box;
+}
+
+body .switch__input:checked + .switch__label {
+  background-color: #fff;
+}
+
+body .switch__input:checked + .switch__label::before {
+  left: calc(100% - 20px);
+  border-color: #fff;
+  background-color: #333;
+  color: #fff;
+  content: "\f186";
+}
+
+body.light main {
+    background-color: #fff;
+}
+
+body.dark main {
+    background-color: #333333;
+}
+
+main div.main-content {
+    width: calc(97% - 40px);
+    margin: auto;
+    padding: 0 20px 0 20px;
+}
+
+main div.main-content *:first-child {
+    margin-top: 0;
+}
+
+main div.main-content *:last-child {
+    margin-bottom: 0;
+}
+
+body.light main div.main-content {
+    background-color: #E6F0FF;
+}
+
+main div.main-content a, main div.main-content a:visited {
+    text-decoration: none;
+    color: #1E90FF;
+}
+
+body.dark main div.main-content {
+    background-color: #1e1e1e;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 5px 5px 5px;
+    margin-bottom: 5%;
+    position: relative;
+    border-bottom-left-radius: 15px 15px;
+    border-bottom-right-radius: 15px 15px;
+}
+
+body.light .footer {
+    background-color: #fff;
+}
+
+body.dark .footer {
+    background-color: #333333;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: -64px;
+    width: 97%;
+    margin: auto;
+    height: 20px;
+    border-bottom-left-radius: 100px 100px;
+    border-bottom-right-radius: 100px 100px;
+}
+
+body.light .footer::before {
+    background-color: #E6F0FF;
+}
+
+body.dark .footer::before {
+    background-color: #1e1e1e;
+}
+
+/* Very large screens (1200px and above) */
+@media (min-width: 1200px) {
+    content {
+        width: 50%;
+    }
+}
+
+/* Mid-large screens (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    content {
+        width: 70%;
+    }
+}
+
+/* Mobile screens (below 768px) */
+@media (max-width: 767px) {
+    content {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    header.header {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .footer {
+        margin-bottom: 10%;
+    }
+}
+
+/* --------------------------------------------------------ADDED A TRANSFORM EFFECT--------------------------------------------- */
+body.light .effect:hover{
+    font-size: 1.2rem;
+    color: rgb(240, 14, 217);
+}
+body.light #effect:hover{
+    font-size: 1.2rem;
+    color: rgb(240, 14, 217);
+}
+body.dark .effect:hover{
+    font-size: 1.2rem;
+    color: rgb(244, 224, 50);
+}
+body.dark #effect:hover{
+    font-size: 1.2rem;
+    color: rgb(244, 224, 50);
+}
